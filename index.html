@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Trash Panda Aerospace: launch, collect, bounce, upgrade, and reach space." />
+  <title>Trash Panda Aerospace</title>
+</head>
+<body>
+  <main id="stage" aria-label="Trash Panda Aerospace game">
+    <canvas id="game" aria-label="Drag the raccoon to launch. Hold Space for jetpack, A/D to steer. Deployables: 1 thruster, 2 boots, 3 teleporter, 4/5/6 health packs. Escape opens the menu." tabindex="0"></canvas>
+    <button id="menu-toggle" aria-controls="game-menu" aria-expanded="false">MENU</button>
+    <label id="name-field">PILOT NAME <input id="pilot-name" maxlength="24" placeholder="New pilot" autocomplete="off" /></label>
+    <section id="game-menu" role="dialog" aria-modal="true" aria-labelledby="menu-title" hidden>
+      <div class="menu-panel">
+        <span class="eyebrow">TRASH PANDA AEROSPACE</span>
+        <h1 id="menu-title">PIT STOP</h1>
+        <p id="status" aria-live="polite"></p>
+        <div class="menu-actions">
+          <button id="resume">BACK TO GAME</button><button id="garage">GARAGE</button>
+          <button id="reset">RESET FLIGHT</button><button id="main-menu">SAVE SLOTS</button>
+        </div>
+        <h2>AUDIO</h2>
+        <label class="audio-row">Master volume <input id="master-volume" type="range" min="0" max="100" /><output id="master-value"></output></label>
+        <label class="mute-row"><input id="master-mute" type="checkbox" /> Mute all sound</label>
+        <label class="audio-row">Game effects <input id="effects-volume" type="range" min="0" max="100" /><output id="effects-value"></output></label>
+        <label class="mute-row"><input id="effects-mute" type="checkbox" /> Mute game effects</label>
+        <label class="mute-row"><input id="spoken-guide" type="checkbox" /> Spoken survival guide</label>
+        <label class="audio-row">Music <input id="music-volume" type="range" min="0" max="100" /><output id="music-value"></output></label>
+        <label class="mute-row"><input id="music-mute" type="checkbox" /> Mute music</label>
+        <details><summary>HOW TO FLY</summary>
+          <p>Drag the ball and release. Pull down to launch up, or sideways for an angled launch. Keyboard launch: hold Down Arrow, aim with Left/Right, then release Down.</p>
+          <p>Space: jetpack · A/D or Left/Right: steer. Deployables: 1 thruster · 2 boots · 3 teleporter · 4/5/6 health packs. Tap a deployable slot on mobile or click it on desktop. Each use consumes one item. Escape: menu · R: reset flight.</p>
+          <p>Bounce off platforms, gather coins and scrap, and return to the garage for upgrades. Your payday arrives after each flight.</p>
+        </details>
+      </div>
+    </section>
+    <div id="accessible-controls" class="accessible" aria-label="Game menu controls"></div>
+  </main>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

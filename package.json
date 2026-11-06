@@ -1,0 +1,8 @@
+{
+  "name": "trash-panda-aerospace",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "dev": "vite --host 127.0.0.1", "build": "tsc --noEmit && vite build", "check": "node tests/foundation.mjs && node tests/economy-audit.mjs && node tests/controls-animation.mjs && node tests/world-regression.mjs && node tests/sky-collection-salvage.mjs && node tests/playtest-regression.mjs && node tests/player-animation.mjs && node tests/animation-assets.mjs && node tests/payday.mjs && node tests/audio-payday.mjs && node tests/hud.mjs && node tests/item-art.mjs && node tests/deployable-shop.mjs && node tests/cold-feedback.mjs && node tests/fuel-upgrades.mjs", "check:simulation": "node tests/balance-sampling.mjs artifacts/playtest/economy-current.json && node tests/simulation-audit.mjs", "preview": "vite preview --host 127.0.0.1" },
+  "devDependencies": { "typescript": "^5.9.3", "vite": "^7.1.9" }
+}

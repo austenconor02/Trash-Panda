@@ -1,0 +1,13 @@
+node_modules/
+dist/
+*.local
+artifacts/
+coverage/
+*.log
+.env
+.env.*
+!.env.example
+.codex/
+.agents/
+.aws/
+.DS_Store

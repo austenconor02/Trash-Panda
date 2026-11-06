@@ -1,0 +1,99 @@
+:root { font-family: system-ui, sans-serif; color: #dcf3d7; background: #101719; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; overflow: hidden; }
+#stage { position: relative; width: 100vw; height: 100dvh; overflow: hidden; }
+canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+button, input { font: inherit; }
+button { cursor: pointer; border: 1px solid #5c8b5d; border-left: 3px solid #91c58b; background: linear-gradient(#19351e, #0c2413); color: #bdf3b9; padding: 12px 16px; font-size: 12px; letter-spacing: .8px; box-shadow: inset 0 1px #c5ffc015; }
+button:hover:enabled { background: #2b5030; border-color: #cbffc2; }
+button:disabled { opacity: .4; cursor: default; }
+button:focus-visible, input:focus-visible, summary:focus-visible, canvas:focus-visible { outline: 2px solid #a0ffc3; outline-offset: 2px; }
+#menu-toggle { position: absolute; top: 14px; right: 14px; z-index: 2; font-family: monospace; background: #14251deb; backdrop-filter: blur(8px); }
+#name-field { position: absolute; bottom: 2%; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; font: 12px monospace; background: #17271ded; border: 1px solid #64745b; box-shadow: 0 5px 20px #0006; padding: 10px 16px; }
+#pilot-name { width: 180px; padding: 8px; background: #0a2011; border: 1px solid #679062; color: #def9d4; }
+[hidden] { display: none !important; }
+#game-menu { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; background: #07100866; backdrop-filter: blur(10px) brightness(.7); padding: 28px; }
+.menu-panel { position: relative; isolation: isolate; width: min(540px, 100%); max-height: 100%; overflow-y: auto; padding: 28px; border: 13px solid #303c31; outline: 1px solid #8b947a; border-radius: 18px 9px 18px 9px; background: linear-gradient(125deg, #18351d, #091d10 65%, #102a16); box-shadow: 0 30px 80px #000b, inset 0 0 0 2px #080f0a, inset 0 0 32px #0005; }
+.menu-panel::before { content: "TP / FIELD TERMINAL 08"; display: block; margin: -12px 0 18px; padding-bottom: 12px; border-bottom: 1px solid #426b42; color: #8caf7e; font: 9px monospace; letter-spacing: 2px; }
+.menu-panel::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: repeating-linear-gradient(transparent 0 3px, #00000012 3px 4px); }
+.eyebrow { font: 10px monospace; letter-spacing: 2px; color: #8cb17f; }
+h1 { margin: 10px 0; font: bold 28px monospace; color: #c8ffc1; }
+h2 { font: 13px monospace; color: #bdf3b9; margin: 24px 0 12px; border-top: 1px solid #416b40; padding-top: 18px; }
+#status { font: 12px monospace; color: #91b59f; }
+.menu-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 20px; }
+.audio-row { display: grid; grid-template-columns: 110px 1fr 38px; align-items: center; gap: 12px; font-size: 13px; margin-top: 14px; }
+.audio-row input { width: 100%; accent-color: #85ffae; }
+output { font: 11px monospace; }
+.mute-row { display: flex; align-items: center; gap: 8px; color: #91b59f; font-size: 12px; margin-top: 7px; }
+.mute-row input { accent-color: #85ffae; }
+details { margin-top: 24px; border-top: 1px solid #315e47; padding-top: 16px; }
+summary { cursor: pointer; font: 12px monospace; color: #baffd0; }
+details p { font-size: 12px; line-height: 1.7; color: #a5c4b2; }
+.accessible { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.accessible:focus-within { left: 12px; bottom: 12px; z-index: 4; width: min(650px, calc(100% - 24px)); height: auto; max-height: 70vh; overflow-y: auto; display: flex; flex-wrap: wrap; gap: 8px; padding: 20px; border: 9px solid #354132; outline: 1px solid #9aa083; border-radius: 12px; background: linear-gradient(125deg, #19361e, #0b2112); box-shadow: 0 15px 55px #000b; }
+.tablet-actions { display: contents; }
+.deployable-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; flex: 1 0 100%; }
+.game-controls .deployable-tile { display: flex; flex-direction: column; align-items: center; gap: 5px; min-width: 0; padding: 8px 4px; letter-spacing: 0; font-size: 9px; }
+.deployable-art { width: 50px; height: 50px; object-fit: contain; }
+.deployable-glyph { display: grid; place-items: center; font-size: 32px; height: 50px; }
+.deployable-price { font: 9px/1.3 monospace; }
+.deployable-tile.is-selected { border-color: #c0ffc0; background: #204a2b; }
+.tablet-title { flex: 1 0 100%; font: bold 24px monospace; margin: 0; text-shadow: 0 0 12px #89f99233; }
+.tablet-subtitle { flex: 1 0 100%; font: 10px/1.6 monospace; color: #9bc78c; margin: 0 0 12px; letter-spacing: .5px; }
+.payday-stats { flex: 1 0 100%; margin: 0 0 8px; font: 12px monospace; }
+.payday-stat { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; min-height: 49px; padding: 9px 11px; margin-bottom: 5px; border-left: 2px solid #3b6741; color: #5f8262; background: #0c2415; }
+.payday-stat::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 3px; height: 1px; background: #609f65; transform: scaleX(var(--progress, 0)); transform-origin: left; }
+.payday-stat.is-visible { color: #a6c6a0; border-left-color: #a4e19b; background: #19351e; }
+.payday-stat dt { text-transform: uppercase; font-size: 10px; letter-spacing: .5px; }
+.payday-stat dd { margin: 0; color: #82ba8d; font: 12px/1.5 monospace; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.payday-stat.is-counting { border-left-color: #d3ffc0; background: #25452b; box-shadow: inset 0 0 20px #91d78312; }
+.payday-stat.is-complete dd { color: #ccffbf; }
+.payday-earnings { position: relative; flex: 1 0 100%; padding: 18px 4px 8px; border-top: 1px solid #547d48; }
+.payday-earnings::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #a4ec9d; transform: scaleX(var(--progress, 0)); transform-origin: left; }
+.payday-label { margin: 0; font: 11px monospace; letter-spacing: 2px; color: #a8d4a1; }
+.payday-money { margin: 8px 0 10px; font: 42px/1.15 monospace; font-variant-numeric: tabular-nums; color: #d6ffcc; overflow-wrap: anywhere; }
+.payday-earnings.is-complete .payday-money { text-shadow: 0 0 16px #b2ff9b44; }
+.payday-coin-stacks { height: 39px; display: flex; align-items: flex-end; gap: 17px; padding: 0 0 5px; }
+.payday-coin-stacks span { display: block; width: 31px; min-height: 0; border-radius: 50% / 3px; background: repeating-linear-gradient(#addf93 0 1px, #6eaa63 1px 3px, #31552d 3px 4px); box-shadow: 0 3px 6px #0005; }
+.payday-status, .payday-note, .payday-wallet { margin: 9px 0; font: 10px/1.6 monospace; color: #90b78a; }
+.payday-status { letter-spacing: .7px; }
+.payday-note { color: #bcb68b; }
+.payday-wallet { padding-top: 8px; border-top: 1px solid #345637; color: #b4d3a8; }
+.payday-actions { display: flex; flex: 1 0 100%; flex-wrap: wrap; gap: 8px; }
+.payday-actions .menu-action { flex: 1 0 44%; }
+.payday-actions .action-skipPayday { flex-basis: 100%; min-height: 30px; padding: 7px; font-size: 10px; border-left-width: 1px; color: #a6bfa0; background: transparent; }
+@media (max-width: 560px) { .menu-panel { padding: 18px; } .audio-row { grid-template-columns: 90px 1fr 34px; gap: 6px; } #name-field { gap: 8px; } }
+#menu-toggle::before { content: "\2630"; margin-right: 8px; }
+.touch-flight-controls { display: none; position: absolute; left: 12px; right: 12px; bottom: max(var(--hud-controls-bottom, 12px), env(safe-area-inset-bottom)); z-index: 2; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; touch-action: none; pointer-events: none; }
+.touch-flight-controls:not([hidden]) { display: block; }
+.touch-flight-controls button { grid-column: span 2; min-height: 40px; padding: 8px; background: #092219ed; user-select: none; -webkit-user-select: none; touch-action: none; }
+.touch-flight-controls button:nth-child(-n+3) { display: none; min-height: 54px; font-size: 24px; }
+.touch-flight-controls button:active { background: #286442; }
+.touch-flight-controls button[data-item] { position: fixed; min-height: 0; padding: 0; color: transparent; border: 0; background: transparent; box-shadow: none; pointer-events: auto; }
+.touch-flight-controls button[data-item]:active { background: #baffae22; }
+.menu-summary { flex: 1 0 100%; margin: 0 0 12px; white-space: pre-line; font: 14px/1.6 monospace; }
+@media (pointer: coarse) { .touch-flight-controls:not([hidden]) { display: grid; } }
+@media (pointer: coarse) { .touch-flight-controls button:nth-child(-n+3) { display: block; pointer-events: auto; } }
+@media (max-width: 650px) {
+  .accessible.game-controls, .accessible.game-controls:focus-within { position: absolute; inset: 66px 13px 82px; z-index: 2; width: auto; height: auto; max-height: none; overflow-y: auto; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 8px; padding: 16px 13px; border: 9px solid #354132; outline: 1px solid #949c7c; border-radius: 14px 7px 14px 7px; background: linear-gradient(130deg, #18361e, #0a2112 70%); box-shadow: 0 20px 50px #000a, inset 0 0 25px #0005; }
+  .accessible.game-controls::before { content: "TP / FIELD TERMINAL 08"; flex: 1 0 100%; color: #7b9b70; font: 8px monospace; letter-spacing: 1.5px; margin-bottom: 5px; }
+  .accessible.game-controls::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(transparent 0 3px, #0000000b 3px 4px); }
+  .accessible.game-controls[data-booting="true"]::after { background: linear-gradient(transparent, #b6ff9b33) 0 var(--scan-y, 0%) / 100% 30px no-repeat, repeating-linear-gradient(transparent 0 3px, #0000000b 3px 4px); }
+  .game-controls .menu-action { flex: 1 0 45%; min-height: 44px; font-size: 12px; padding: 10px; }
+  .game-controls .action-select, .game-controls .action-slot { flex-basis: 100%; }
+  .screen-garage .action-category { flex: 1 0 29%; min-height: 36px; font-size: 10px; padding: 8px 4px; }
+  .game-controls .action-level { flex: 0 0 calc(20% - 7px); min-width: 48px; overflow-wrap: anywhere; padding: 6px; font-size: 10px; }
+  .game-controls .unselected-level { display: none; }
+  .game-controls .action-buy { position: sticky; bottom: 0; z-index: 1; flex-basis: 100%; background: #185638; box-shadow: 0 0 14px #072219; }
+  .screen-results .tablet-title { font-size: 22px; }
+  .screen-results .tablet-subtitle { font-size: 9px; margin-bottom: 2px; }
+  .screen-results .payday-stats { margin-bottom: 0; }
+  .screen-results .payday-stat { min-height: 36px; margin-bottom: 4px; padding: 8px 10px; }
+  .screen-results .payday-money { font-size: clamp(28px, 9vw, 42px); }
+  .screen-results .payday-earnings { padding-top: 13px; }
+  .screen-results .payday-actions .action-skipPayday { min-height: 30px; padding: 6px; }
+  .screen-results .payday-actions { position: sticky; bottom: -16px; z-index: 1; padding: 8px 0; border-top: 1px solid #547d48; background: #0c2414; }
+  #name-field { width: calc(100% - 20px); justify-content: center; bottom: 12px; padding: 8px; font-size: 10px; }
+  #pilot-name { width: min(180px, 50vw); }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } .accessible.game-controls[data-booting="true"]::after { background: repeating-linear-gradient(transparent 0 3px, #0000000b 3px 4px); } }
